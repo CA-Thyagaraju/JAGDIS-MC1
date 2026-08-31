@@ -1,0 +1,27 @@
+# Simulation outputs
+output/*.vcd
+output/*.out
+
+# General generated simulation files
+*.vcd
+*.out
+*.log
+
+# Synthesis / implementation generated files
+runs/
+*.json
+*.rpt
+*.sdc
+
+# Tool/cache directories
+.openlane/
+.librelane/
+.venv/
+__pycache__/
+
+# Editor / OS junk
+.vscode/
+.idea/
+*.swp
+*~
+.DS_Store
