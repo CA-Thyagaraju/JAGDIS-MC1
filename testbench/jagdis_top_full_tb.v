@@ -155,7 +155,90 @@ module jagdis_top_full_tb;
         set_hall(3'b011); wait_for_hall_active(3'b011); expect_gates(6'b000110, "011 must command C+ B-");
         set_hall(3'b001); wait_for_hall_active(3'b001); expect_gates(6'b100100, "forward sequence must wrap to 001");
 
-        // Duty transfer is boundary-aligned and preserves the exact mapping.
+            // Latest-valid-Hall-wins regression.
+    //
+    // A Hall transition may occur more than once within one PWM period.
+    // hall_active must remain unchanged until the PWM boundary, while
+    // hall_pending tracks the latest valid Hall state.
+    //
+    // Sequence:
+    //     001 active
+    //       ↓
+    //     101 pending
+    //       ↓
+    //     100 pending (replaces 101)
+    //       ↓
+    //     PWM boundary
+    //       ↓
+    //     100 active
+
+    // Align to the beginning of a PWM period.
+    i = 0;
+    while ((dut.pwm_counter != 11'd0) && (i < 1300)) begin
+        @(posedge clk); #1;
+        i = i + 1;
+    end
+
+    if (dut.pwm_counter != 11'd0)
+        fail("could not align latest-Hall test to PWM period start");
+
+    // First valid transition: 001 -> 101.
+    set_hall(3'b101);
+
+    i = 0;
+    while ((!dut.hall.pending_valid ||
+            dut.hall.hall_pending !== 3'b101) &&
+           (i < 20)) begin
+        @(posedge clk); #1;
+        i = i + 1;
+    end
+
+    if (!dut.hall.pending_valid ||
+        dut.hall.hall_pending !== 3'b101)
+        fail("101 did not become the pending Hall state");
+
+    if (dut.hall.hall_active !== 3'b001)
+        fail("active Hall changed before PWM boundary");
+
+    // Second valid transition arrives before the PWM boundary:
+    // 101 -> 100. The new RTL must validate 100 against the pending
+    // 101 state rather than the still-active 001 state.
+    set_hall(3'b100);
+
+    i = 0;
+    while ((!dut.hall.pending_valid ||
+            dut.hall.hall_pending !== 3'b100) &&
+           (i < 20)) begin
+        @(posedge clk); #1;
+        i = i + 1;
+    end
+
+    if (!dut.hall.pending_valid ||
+        dut.hall.hall_pending !== 3'b100)
+        fail("latest valid Hall state did not replace previous pending state");
+
+    if (dut.hall.hall_active !== 3'b001)
+        fail("active Hall changed before PWM boundary during latest-Hall test");
+
+    // Wait for the PWM boundary and verify that the latest pending state,
+    // 100 rather than the stale 101, becomes active.
+    i = 0;
+    while ((dut.hall.hall_active !== 3'b100) && (i < 1300)) begin
+        @(posedge clk); #1;
+        i = i + 1;
+    end
+
+        if (dut.hall.hall_active !== 3'b100)
+            fail("latest valid Hall state was not committed at PWM boundary");
+                if (dut.hall.phase_cmd !== 6'b001001)
+            fail("Hall 100 must command B+ C- after latest-Hall commit");
+
+        // Restore the known Hall-001 operating state expected by the
+        // subsequent duty-cycle tests.
+        reset_controller;
+        start_forward_full_duty;
+
+       // Duty transfer is boundary-aligned and preserves the exact mapping.
         duty = 10'd512;
         if (dut.duty_active !== 10'd1023)
             fail("DUTY changed duty_active before the PWM boundary");
