@@ -165,7 +165,7 @@ always @(posedge clk or negedge reset_n) begin
                 pending_valid <= 1'b0;
             end
 
-            if (bad_hall_observed) begin
+            if (!hall_valid) begin
                 if (grace_used)
                     hall_fault <= 1'b1;
                 else
@@ -174,7 +174,6 @@ always @(posedge clk or negedge reset_n) begin
                 grace_used <= 1'b0;
             end
 
-            bad_hall_observed <= 1'b0;
         end
     end
 end
