@@ -2,7 +2,7 @@
 
 // Self-checking functional verification for the frozen JAGDIS-MC1 V1 RTL.
 // This test retains real V1 timing: 50 MHz clock, 1250-clock PWM, and 25
-// clock dead time.  It writes output/jagdis_top_full.vcd when run from the
+// clock dead time.  It writes output/simulation_artifacts/jagdis_top_full_tb.vcd when run from the
 // project root.
 module jagdis_top_full_tb;
     reg clk;
@@ -140,7 +140,7 @@ module jagdis_top_full_tb;
         interlock_high_request = 1'b0;
         interlock_low_request = 1'b0;
         errors = 0;
-        $dumpfile("output/jagdis_top_full.vcd");
+        $dumpfile("output/simulation_artifacts/jagdis_top_full_tb.vcd");
         $dumpvars(0, jagdis_top_full_tb);
 
         // Reset and forward commutation table.

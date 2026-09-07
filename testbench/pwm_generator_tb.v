@@ -103,7 +103,7 @@ module pwm_generator_tb;
         errors  = 0;
 
 
-        $dumpfile("output/pwm_generator_tb.vcd");
+        $dumpfile("output/simulation_artifacts/pwm_generator_tb.vcd");
         $dumpvars(0, pwm_generator_tb);
 
 

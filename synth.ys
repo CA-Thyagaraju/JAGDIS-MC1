@@ -1,0 +1,24 @@
+read_verilog src/reset_sync.v
+read_verilog src/pwm_generator.v
+read_verilog src/hall_commutation.v
+read_verilog src/gate_phase.v
+read_verilog src/gate_controller.v
+read_verilog src/fault_manager.v
+read_verilog src/control_fsm.v
+read_verilog src/jagdis_top.v
+
+hierarchy -check -top jagdis_top
+
+proc
+opt
+
+stat
+
+show -format dot -prefix output/synthesis_artifacts/jagdis_hierarchy jagdis_top
+
+flatten
+opt
+show -format dot -prefix output/synthesis_artifacts/jagdis_flat jagdis_top
+
+
+write_verilog -noattr output/synthesis_artifacts/jagdis_synth.v

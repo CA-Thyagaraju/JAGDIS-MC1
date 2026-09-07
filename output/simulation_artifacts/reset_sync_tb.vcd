@@ -1,0 +1,90 @@
+$date
+	Mon Sep  7 21:49:01 2026
+$end
+$version
+	Icarus Verilog
+$end
+$timescale
+	1ps
+$end
+$scope module reset_sync_tb $end
+$var wire 1 ! reset_n_sync $end
+$var reg 1 " clk $end
+$var reg 1 # reset_n $end
+$var integer 32 $ errors [31:0] $end
+$scope module dut $end
+$var wire 1 " clk $end
+$var wire 1 # reset_n $end
+$var wire 1 ! reset_n_sync $end
+$var reg 2 % release_pipe [1:0] $end
+$upscope $end
+$scope task fail $end
+$var reg 800 & message [799:0] $end
+$upscope $end
+$upscope $end
+$enddefinitions $end
+$comment Show the parameter values. $end
+$dumpall
+$end
+#0
+$dumpvars
+bx &
+b0 %
+b0 $
+0#
+0"
+0!
+$end
+#10000
+1"
+#20000
+0"
+#30000
+1"
+#40000
+0"
+#50000
+1"
+#51000
+1#
+#60000
+0"
+#70000
+b1 %
+1"
+#80000
+0"
+#90000
+1!
+b11 %
+1"
+#100000
+0"
+#110000
+1"
+#120000
+0"
+#130000
+1"
+#140000
+0"
+#150000
+1"
+#151000
+0!
+b0 %
+0#
+#152000
+1#
+#160000
+0"
+#170000
+b1 %
+1"
+#180000
+0"
+#190000
+1!
+b11 %
+1"
+#191000

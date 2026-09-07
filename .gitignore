@@ -1,9 +1,4 @@
-# Simulation outputs
-output/*.vcd
-output/*.out
-
-# General generated simulation files
-*.vcd
+# Generated simulation outputs
 *.out
 *.log
 

@@ -106,7 +106,7 @@ module gate_controller_tb;
 
         errors = 0;
 
-        $dumpfile("output/gate_controller_tb.vcd");
+        $dumpfile("output/simulation_artifacts/gate_controller_tb.vcd");
         $dumpvars(0, gate_controller_tb);
 
 

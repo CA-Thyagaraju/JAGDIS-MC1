@@ -113,7 +113,7 @@ module control_fsm_tb;
 
         errors = 0;
 
-        $dumpfile("output/control_fsm_tb.vcd");
+        $dumpfile("output/simulation_artifacts/control_fsm_tb.vcd");
         $dumpvars(0, control_fsm_tb);
 
 

@@ -133,7 +133,7 @@ module hall_commutation_tb;
         errors = 0;
 
 
-        $dumpfile("output/hall_commutation_tb.vcd");
+        $dumpfile("output/simulation_artifacts/hall_commutation_tb.vcd");
         $dumpvars(0, hall_commutation_tb);
 
 

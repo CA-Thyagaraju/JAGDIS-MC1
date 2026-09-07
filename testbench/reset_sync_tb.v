@@ -33,7 +33,7 @@ module reset_sync_tb;
         reset_n = 1'b0;
         errors = 0;
 
-        $dumpfile("output/reset_sync_tb.vcd");
+        $dumpfile("output/simulation_artifacts/reset_sync_tb.vcd");
         $dumpvars(0, reset_sync_tb);
 
 

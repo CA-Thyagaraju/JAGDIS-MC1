@@ -89,7 +89,7 @@ module fault_manager_tb;
 
         errors = 0;
 
-        $dumpfile("output/fault_manager_tb.vcd");
+        $dumpfile("output/simulation_artifacts/fault_manager_tb.vcd");
         $dumpvars(0, fault_manager_tb);
 
 

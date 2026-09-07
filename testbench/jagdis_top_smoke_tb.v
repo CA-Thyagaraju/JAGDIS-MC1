@@ -27,7 +27,7 @@ module jagdis_top_smoke_tb;
     );
 
     initial begin
-        $dumpfile("output/jagdis_top_smoke.vcd");
+        $dumpfile("output/simulation_artifacts/jagdis_top_smoke_tb.vcd");
         $dumpvars(0, jagdis_top_smoke_tb);
         #35 reset_n = 1'b1;
         // Two PWM periods cover reset release, Hall synchronization, shadow

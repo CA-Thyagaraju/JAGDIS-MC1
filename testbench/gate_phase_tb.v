@@ -74,7 +74,7 @@ module gate_phase_tb;
 
         errors = 0;
 
-        $dumpfile("output/gate_phase_tb.vcd");
+        $dumpfile("output/simulation_artifacts/gate_phase_tb.vcd");
         $dumpvars(0, gate_phase_tb);
 
 
